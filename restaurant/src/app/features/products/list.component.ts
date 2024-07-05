@@ -64,8 +64,9 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   searchDishes() {
+    console.log(this.search.trim().length);
     if (this.search.trim().length === 0) {
-      this.filteredProducts = this.products;
+      this.filteredProducts.set(this.products());
       return;
     }
 
