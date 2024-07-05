@@ -1,0 +1,40 @@
+@if(isOpen()) {
+<div class="backdrop" [@fade]></div>
+}
+
+<div class="cart" [@slideInOut]="cartState()">
+  <div class="cart__header">
+    <h3>Your order</h3>
+    <img
+      class="cart__close"
+      src="./assets/icon-x-circle.png"
+      (click)="closeCart()"
+    />
+  </div>
+
+  @for (item of items(); track item.productId) {
+  <app-cart-item [item]="item"></app-cart-item>
+  } @empty {
+  <span class="cart__empty">Your cart is empty!</span>
+  }
+
+  <div class="cart__totals">
+    <div>
+      <div>Subtotal</div>
+      <div>€ {{ subtotal() | number : "1.2" }}</div>
+    </div>
+    <div>
+      <div>Delivery fee</div>
+      <div>€ {{ deliveryFee | number : "1.2" }}</div>
+    </div>
+    <div>
+      <div>Total</div>
+      <div>€ {{ total() | number : "1.2" }}</div>
+    </div>
+  </div>
+
+  <div class="cart__buttons">
+    <button class="btn__order">Order (€ {{ total() | number : "1.2" }})</button>
+    <button (click)="closeCart()">Continue shopping</button>
+  </div>
+</div>

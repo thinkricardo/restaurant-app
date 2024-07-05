@@ -1,0 +1,14 @@
+<div class="cart-item">
+  <h4 class="cart-item__title">{{ item().name }}</h4>
+  <span class="cart-item__price"
+    >Price per item: € {{ item().price | number : "1.2" }}</span
+  >
+
+  <div class="cart-item__footer">
+    <span class="cart-item__footer__total"
+      >Total: € {{ total() | number : "1.2" }}</span
+    >
+
+    <app-cart-options [productId]="item().productId"></app-cart-options>
+  </div>
+</div>

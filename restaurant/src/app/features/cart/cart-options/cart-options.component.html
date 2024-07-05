@@ -1,0 +1,11 @@
+<div class="cart-options">
+  <button (click)="updateQuantity(-1)">
+    <img src="./assets/icon-minus.png" />
+  </button>
+
+  <span>{{ quantity() }}</span>
+
+  <button (click)="updateQuantity(1)">
+    <img src="./assets/icon-plus.png" />
+  </button>
+</div>

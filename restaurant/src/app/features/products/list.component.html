@@ -1,0 +1,40 @@
+<div class="bar">
+  <nav>
+    <button
+      (click)="getDishes(DishType.Popular)"
+      [ngClass]="{ selected: currentDishType === DishType.Popular }"
+    >
+      Popular
+    </button>
+    <button
+      (click)="getDishes(DishType.Burgers)"
+      [ngClass]="{ selected: currentDishType === DishType.Burgers }"
+    >
+      Burgers
+    </button>
+    <button
+      (click)="getDishes(DishType.Steaks)"
+      [ngClass]="{ selected: currentDishType === DishType.Steaks }"
+    >
+      Steaks
+    </button>
+  </nav>
+
+  <div class="bar__search">
+    <img src="./assets/icon-search.png" />
+    <input
+      type="text"
+      placeholder="Search"
+      [(ngModel)]="search"
+      (keyup.enter)="searchDishes()"
+    />
+  </div>
+</div>
+
+<div class="list">
+  @for (product of filteredProducts; track product.id) {
+  <app-card [product]="product"></app-card>
+  } @empty {
+  <span class="list__empty">No results found.</span>
+  }
+</div>

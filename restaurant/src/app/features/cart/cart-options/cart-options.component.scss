@@ -1,0 +1,26 @@
+@import "styles.scss";
+
+$button-size: 32px;
+
+.cart-options {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  .span {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  button {
+    @include button-animated;
+
+    width: $button-size;
+    height: $button-size;
+
+    color: $secondary-color;
+
+    border: none;
+    border-radius: 8px;
+  }
+}

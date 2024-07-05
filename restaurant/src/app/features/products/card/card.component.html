@@ -1,0 +1,22 @@
+<section class="card">
+  <div class="card__image">
+    <img src="{{ serverUrl }}/{{ product().image }}" />
+  </div>
+
+  <div class="card__details">
+    <div class="card__description">
+      <h3>{{ product().name }}</h3>
+      <span>{{ product().description }}</span>
+    </div>
+
+    <div class="card__footer">
+      @if (!isInCart()) {
+      <button (click)="addProduct()">Add to cart</button>
+      } @else {
+      <app-cart-options [productId]="product().id"></app-cart-options>
+      }
+
+      <span>€ {{ product().price | number : "1.2" }}</span>
+    </div>
+  </div>
+</section>

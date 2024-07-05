@@ -1,0 +1,51 @@
+@import "styles.scss";
+
+$icon-location: 50px;
+$icon-size: 90px;
+
+$elements-size: 24px;
+
+:host {
+  position: fixed;
+  right: $icon-location;
+  bottom: $icon-location;
+}
+
+.cart-icon {
+  @include button-animated;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: $icon-size;
+  height: $icon-size;
+
+  border-radius: calc($icon-size / 2);
+
+  background-color: $action-color;
+
+  img {
+    margin-top: 20px;
+
+    width: $elements-size;
+    height: $elements-size;
+  }
+
+  &__count {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 20px;
+
+    width: $elements-size;
+    height: $elements-size;
+
+    background-color: #ffffff;
+    border-radius: $elements-size;
+
+    font-size: 14px;
+    font-weight: 700;
+  }
+}

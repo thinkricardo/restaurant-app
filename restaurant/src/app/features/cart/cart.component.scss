@@ -1,0 +1,110 @@
+@import "styles.scss";
+
+.backdrop {
+  position: fixed;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  z-index: 1;
+
+  background-color: #000000;
+
+  opacity: 0.3;
+}
+
+.cart {
+  position: fixed;
+  left: auto;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  overflow-y: auto;
+
+  z-index: 2;
+
+  width: 380px;
+
+  padding: 50px 20px 20px 20px;
+
+  background-color: #ffffff;
+  box-shadow: 0px 2.77px 2.21px 0px #87878705, 0px 6.65px 5.32px 0px #87878707,
+    0px 12.52px 10.02px 0px #87878709, 0px 22.34px 17.87px 0px #8787870b,
+    0px 41.78px 33.42px 0px #8787870d, 0px 100px 80px 0px #87878712;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 20px;
+
+    h3 {
+      margin: 0;
+
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 36px;
+    }
+  }
+
+  &__close {
+    @include button-animated;
+
+    width: 24px;
+    height: 24px;
+  }
+
+  &__empty {
+    display: block;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+  }
+
+  button {
+    @include button-animated;
+
+    width: 100%;
+    height: 45px;
+
+    border: none;
+    border-radius: 8px;
+
+    margin-bottom: 8px;
+
+    background-color: #f7f7f7;
+
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+  }
+
+  .btn__order {
+    background-color: $action-color;
+    color: #ffffff;
+  }
+
+  &__totals {
+    margin-top: 50px;
+
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+
+    > div {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    div {
+      margin-bottom: 4px;
+    }
+  }
+
+  &__buttons {
+    margin-top: 16px;
+  }
+}
