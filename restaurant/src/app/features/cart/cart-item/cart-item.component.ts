@@ -7,10 +7,10 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CartOptionsComponent } from '../cart-options/cart-options.component';
+import { CartOptionsComponent } from '@cart/cart-options/cart-options.component';
 
-import { CartService } from '../../../services/cart.service';
-import { CartItem } from '../../../models/cart-item.model';
+import { CartService } from '@services/cart.service';
+import { CartItem } from '@models/cart-item.model';
 
 @Component({
   selector: 'app-cart-item',

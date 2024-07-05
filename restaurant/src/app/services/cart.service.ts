@@ -1,28 +1,20 @@
 import { Injectable } from '@angular/core';
-
-import {
-  BehaviorSubject,
-  map,
-  Observable,
-  Subject,
-  subscribeOn,
-  switchMap,
-  tap,
-} from 'rxjs';
-
-import { environment } from '../../environments/environment';
-
-import { CartItem } from '../models/cart-item.model';
-import { Product } from '../models/product.model';
 import { HttpClient } from '@angular/common/http';
-import { Basket } from '../models/basket.model';
+
+import { BehaviorSubject, tap } from 'rxjs';
+
+import { environment } from '@env/environment';
+
+import { CartItem } from '@models/cart-item.model';
+import { Product } from '@models/product.model';
+import { Basket } from '@models/basket.model';
+
+const storageKeyId = 'restaurant_session_id';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  initial = true;
-
   private cart = new BehaviorSubject<CartItem[] | undefined>(undefined);
   private items: CartItem[] = [];
 
@@ -38,7 +30,7 @@ export class CartService {
   }
 
   loadCart() {
-    const sessionId = localStorage.getItem('restaurante_session_id');
+    const sessionId = localStorage.getItem(storageKeyId);
 
     if (!sessionId) return undefined;
 
@@ -55,7 +47,7 @@ export class CartService {
   }
 
   updateCart() {
-    const sessionId = localStorage.getItem('restaurante_session_id');
+    const sessionId = localStorage.getItem(storageKeyId);
     let url = `${environment.serverUrl}/basket`;
 
     let request = null;
@@ -72,10 +64,10 @@ export class CartService {
 
     return request.pipe(
       tap((data) => {
-        const sessionId = localStorage.getItem('restaurante_session_id');
+        const sessionId = localStorage.getItem(storageKeyId);
 
         if (!sessionId) {
-          localStorage.setItem('restaurante_session_id', data.id);
+          localStorage.setItem(storageKeyId, data.id);
         }
       })
     );

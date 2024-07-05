@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { environment } from '../../environments/environment';
-import { DishType } from '../features/enums/dish-type.enum';
-import { Product } from '../models/product.model';
+import { environment } from '@env/environment';
+
+import { Product } from '@models/product.model';
+
+import { DishType } from '@enums/dish-type.enum';
 
 @Injectable({
   providedIn: 'root',

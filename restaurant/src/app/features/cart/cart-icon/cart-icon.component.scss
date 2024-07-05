@@ -12,7 +12,7 @@ $elements-size: 24px;
 }
 
 .cart-icon {
-  @include button-animated;
+  @include button-animated(#ffffff);
 
   display: flex;
   justify-content: center;

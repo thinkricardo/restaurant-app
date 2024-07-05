@@ -11,7 +11,7 @@
     margin-bottom: 30px;
 
     button {
-      @include button-animated;
+      @include button-animated(#ffffff);
 
       width: 79px;
       height: 29px;

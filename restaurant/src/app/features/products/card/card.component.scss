@@ -1,4 +1,4 @@
-@import "../../../../styles.scss";
+@import "styles.scss";
 
 .card {
   display: flex;
@@ -66,7 +66,7 @@
     gap: 16px;
 
     button {
-      @include button-animated;
+      @include button-animated(#ffffff);
 
       width: 110px;
       height: 30px;

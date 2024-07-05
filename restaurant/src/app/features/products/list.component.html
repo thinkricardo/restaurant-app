@@ -32,7 +32,7 @@
 </div>
 
 <div class="list">
-  @for (product of filteredProducts; track product.id) {
+  @for (product of filteredProducts(); track product.id) {
   <app-card [product]="product"></app-card>
   } @empty {
   <span class="list__empty">No results found.</span>

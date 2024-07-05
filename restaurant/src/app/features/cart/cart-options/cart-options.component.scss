@@ -13,7 +13,11 @@ $button-size: 32px;
   }
 
   button {
-    @include button-animated;
+    @include button-animated(#000000);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     width: $button-size;
     height: $button-size;

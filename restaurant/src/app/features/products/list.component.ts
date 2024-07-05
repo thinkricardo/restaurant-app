@@ -1,10 +1,22 @@
-import { Component, inject, signal } from '@angular/core';
-import { CardComponent } from './card/card.component';
-import { ProductsService } from '../../services/products.service';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnDestroy,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Product } from '../../models/product.model';
-import { DishType } from '../enums/dish-type.enum';
+
+import { CardComponent } from './card/card.component';
+
+import { ProductsService } from '@services/products.service';
+
+import { Product } from '@models/product.model';
+
+import { DishType } from '@enums/dish-type.enum';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -12,12 +24,13 @@ import { DishType } from '../enums/dish-type.enum';
   imports: [CommonModule, FormsModule, CardComponent],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ListComponent {
+export class ListComponent implements OnInit, OnDestroy {
   productsService = inject(ProductsService);
 
-  products: Product[] = [];
-  filteredProducts: Product[] = [];
+  products = signal<Product[]>([]);
+  filteredProducts = signal<Product[]>([]);
 
   search = '';
 
@@ -25,19 +38,29 @@ export class ListComponent {
 
   currentDishType = DishType.Popular;
 
+  subscription: Subscription = Subscription.EMPTY;
+
   ngOnInit(): void {
     this.getDishes(this.currentDishType);
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription && !this.subscription.closed) {
+      this.subscription.unsubscribe();
+    }
   }
 
   getDishes(dishType: DishType) {
     this.currentDishType = dishType;
 
-    this.productsService.getDishes(dishType).subscribe((data) => {
-      this.products = data;
-      this.filteredProducts = data;
+    this.subscription = this.productsService
+      .getDishes(dishType)
+      .subscribe((data) => {
+        this.products.set(data);
+        this.filteredProducts.set(data);
 
-      this.searchDishes();
-    });
+        this.searchDishes();
+      });
   }
 
   searchDishes() {
@@ -46,8 +69,10 @@ export class ListComponent {
       return;
     }
 
-    this.filteredProducts = this.products.filter((p) => {
-      return p.name.toLowerCase().indexOf(this.search.toLowerCase()) >= 0;
-    });
+    this.filteredProducts.set(
+      this.products().filter((p) => {
+        return p.name.toLowerCase().indexOf(this.search.toLowerCase()) >= 0;
+      })
+    );
   }
 }
